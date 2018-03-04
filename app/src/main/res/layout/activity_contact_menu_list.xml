@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.avadh.mycontactbackup2.ContactMenuList"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_listlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <ListView
+        android:id="@+id/lv_contactlist"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="20sp"
+        android:isScrollContainer="true"></ListView>
+    </LinearLayout>
+    <Button
+        android:id="@+id/bt_backup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ll_listlayout"
+        android:text="Backup"/>
+
+    <Button
+        android:id="@+id/bt_restore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/bt_backup"
+        android:text="Restore"/>
+
+    <Button
+        android:id="@+id/bt_viewbackup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/bt_restore"
+        android:text="View backup"/>
+
+    <Button
+        android:id="@+id/bt_deletebackup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/bt_viewbackup"
+        android:text="Delete Backup"/>
+</RelativeLayout>

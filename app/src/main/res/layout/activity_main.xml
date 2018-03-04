@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.avadh.mycontactbackup2.MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Existing user? login Login"
+        android:layout_marginTop="20sp"
+        android:layout_marginHorizontal="40px"
+        android:padding="20sp"/>
+
+    <TextView
+        android:id="@+id/tv_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Dont hane a account yet !! Sign up"
+        android:layout_marginHorizontal="40px"
+        android:layout_marginTop="20sp"
+        android:padding="20sp"/>
+</LinearLayout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "41548577548",
+    "firebase_url": "https://my-contact-backup-2.firebaseio.com",
+    "project_id": "my-contact-backup-2",
+    "storage_bucket": "my-contact-backup-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41548577548:android:122b34799637d6d4",
+        "android_client_info": {
+          "package_name": "com.avadh.mycontactbackup2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41548577548-hboght82gkvqm5ju774st380ekkkohir.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.avadh.mycontactbackup2",
+            "certificate_hash": "781d30b8c25f5c8ab9a7ff6bf246fc619b32a3e4"
+          }
+        },
+        {
+          "client_id": "41548577548-29ne33gamm7cm3hhc42bafj2pscrirna.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpiub-GOKRE__7kEyPb_ODfv3GQoEZHIs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41548577548-29ne33gamm7cm3hhc42bafj2pscrirna.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
