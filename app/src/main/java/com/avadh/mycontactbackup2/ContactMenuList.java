@@ -18,13 +18,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class ContactMenuList extends AppCompatActivity implements View.OnClickListener{
+public class ContactMenuList extends AppCompatActivity implements View.OnClickListener,OnContactsRead{
 
     private Button mBackup;
     private Button mRestore;
     private Button mViewBackup;
     private Button mDeleteBackup;
     private ListView lv_BackupList;
+    private ArrayList<String> mContactList;
     ArrayAdapter<String> mArrayAdapter;
 
 
@@ -98,17 +99,27 @@ public class ContactMenuList extends AppCompatActivity implements View.OnClickLi
 
         } else if (btnClkId == R.id.bt_restore) {
             RetrieveContactList retrieveContactList = new RetrieveContactList();
+            retrieveContactList.setOnContactsReadListner(this);
             ArrayList<String> contactList = retrieveContactList.RetrieveContact();
-
-            mArrayAdapter = new ArrayAdapter<String>(
-                    ContactMenuList.this,
-                    R.layout.contact_item_listview,
-                    R.id.textView,contactList);
-            lv_BackupList.setAdapter(mArrayAdapter);
 
         } else if (btnClkId == R.id.bt_viewbackup) {
         } else if (btnClkId == R.id.bt_deletebackup) {
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.child("avd").child("contacts").removeValue();
 
         }
+    }
+
+    @Override
+    public void onCompleted(ArrayList<String> stringArrayList) {
+        mArrayAdapter = new ArrayAdapter<String>(
+                ContactMenuList.this,
+                R.layout.contact_item_listview,
+                R.id.textView,stringArrayList);
+        lv_BackupList.setAdapter(mArrayAdapter);
+
+        mContactList = stringArrayList;
+        RestoreContacts restoreContacts = new RestoreContacts(mContactList);
+        restoreContacts.StoreContacts(this);
     }
 }

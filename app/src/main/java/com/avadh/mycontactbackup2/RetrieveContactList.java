@@ -19,8 +19,10 @@ public class RetrieveContactList {
     private ListView mContactListView;
     ArrayList<String> mContactList;
     private DatabaseReference mDatabaseReference;
+    OnContactsRead onContactsRead;
 
     public RetrieveContactList() {
+        onContactsRead = null;
         mContactList = new ArrayList<>();
     }
 
@@ -30,14 +32,17 @@ public class RetrieveContactList {
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<String> mContactList = new ArrayList<>();
+//                ArrayList<String> mContactList = new ArrayList<>();
                 for (DataSnapshot contactSnapshot : dataSnapshot.getChildren()) {
-                    String contactName = contactSnapshot.getKey();
-                    String contactNumber = contactSnapshot.getValue(String.class);
+                    String contactName = contactSnapshot.getKey().trim();
+                    String contactNumber = contactSnapshot.getValue(String.class).trim();
                     mContactList.add(contactName + " : " + contactNumber);
                 }
+                onContactsReadCompleted();
+/*
                 RetrieveContactList retrieveContactList = new RetrieveContactList();
                 retrieveContactList.mContactList = mContactList;
+*/
 
                 }
 
@@ -80,5 +85,13 @@ public class RetrieveContactList {
 */
         Log.d("My Tag........",mContactList.toString());
         return mContactList;
+    }
+
+    public void setOnContactsReadListner(OnContactsRead onContactsRead) {
+        this.onContactsRead = onContactsRead;
+    }
+
+    public void onContactsReadCompleted() {
+        this.onContactsRead.onCompleted(mContactList);
     }
 }
