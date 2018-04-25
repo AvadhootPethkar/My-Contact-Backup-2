@@ -3,6 +3,8 @@ package com.avadh.mycontactbackup2;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,18 +20,37 @@ import java.util.ArrayList;
 public class RetrieveContactList {
     private ListView mContactListView;
     ArrayList<String> mContactList;
-    private DatabaseReference mDatabaseReference;
+    DatabaseReference mDatabaseReference;
     OnContactsRead onContactsRead;
+    private FirebaseAuth mAuth;
+    ValueEventListener valueEventListener;
+    private String mUserId;
+
 
     public RetrieveContactList() {
         onContactsRead = null;
         mContactList = new ArrayList<>();
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public ArrayList<String> RetrieveContact() {
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("avd").child("contacts");
 
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        String currentUserDisplayName;
+        if (currentUser != null) {
+            currentUserDisplayName = currentUser.getDisplayName();
+        } else {
+            currentUserDisplayName = "wrong";
+        }
+
+//        String userName = mAuth.getCurrentUser().getDisplayName();
+//        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(mUserId).child(currentUserDisplayName).child("contacts");
+//        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(mUserId).child(userName).child("contacts");
+        mUserId = mAuth.getCurrentUser().getUid();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(mUserId).child("contacts");
+
+        valueEventListener = mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 //                ArrayList<String> mContactList = new ArrayList<>();
@@ -44,7 +65,7 @@ public class RetrieveContactList {
                 retrieveContactList.mContactList = mContactList;
 */
 
-                }
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

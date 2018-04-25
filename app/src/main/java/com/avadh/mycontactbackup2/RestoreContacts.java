@@ -1,8 +1,13 @@
 package com.avadh.mycontactbackup2;
 
+import android.annotation.SuppressLint;
+import android.content.ContentProviderOperation;
+import android.content.ContentProviderResult;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.OperationApplicationException;
 import android.net.Uri;
+import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.util.Log;
 
@@ -13,50 +18,38 @@ import java.util.ArrayList;
  */
 
 public class RestoreContacts {
-    private ArrayList<String> mContactList;
-    private String mKey;
-    private String mContactName;
-    private String mContactNumber;
 
-    public RestoreContacts(ArrayList<String> mContactList) {
-        this.mContactList = mContactList;
-    }
-    
-    public void StoreContacts(Context context) {
+    public static void Insert2Contacts(Context context, String nameSurname, String telephone) {
 
-        for (String contactList :
-                mContactList) {
-            String[] Contact = contactList.split(":\\s+");
-            int i = 0;
-            for (String Token :
-                    Contact) {
-                if (i == 1) {
-/*
-                    ContentValues values = new ContentValues();
-                    values.put(ContactsContract.Data.RAW_CONTACT_ID, 001);
-                    values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
-                    values.put(ContactsContract.CommonDataKinds.Phone.NUMBER, "1-800-GOOG-411");
-                    values.put(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM);
-                    values.put(ContactsContract.CommonDataKinds.Phone.LABEL, "Nirav");
+        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+        int rawContactInsertIndex = ops.size();
 
-                    Uri dataUri = context.getContentResolver().insert(android.provider.ContactsContract.Data.CONTENT_URI, values);
-*/
+        ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
+                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null).build());
+        ops.add(ContentProviderOperation
+                .newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(
+                        ContactsContract.Data.RAW_CONTACT_ID,
+                        rawContactInsertIndex)
+                .withValue(ContactsContract.Contacts.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, telephone).build());
+        ops.add(ContentProviderOperation
+                .newInsert(ContactsContract.Data.CONTENT_URI)
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID,
+                        rawContactInsertIndex)
+                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, nameSurname)
+                .build());
+        try {
+            ContentProviderResult[] res = context.getContentResolver()
+                    .applyBatch(ContactsContract.AUTHORITY, ops);
+        } catch (Exception e) {
 
-//                    ContactsContract.CommonDataKinds.Phone phoneNo ;
-                }
-                Log.d("Splited token ... ", Token.trim());
-                i++;
-            }
-            i = 0;
+            Log.d("Message ********** ", e.getMessage());
         }
-        ContentValues values = new ContentValues();
-        values.put(ContactsContract.Data.RAW_CONTACT_ID, 001);
-        values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
-        values.put(ContactsContract.CommonDataKinds.Phone.NUMBER, "1-800-GOOG-411");
-        values.put(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM);
-        values.put(ContactsContract.CommonDataKinds.Phone.LABEL, "free directory assistance");
-
-        Uri dataUri = context.getContentResolver().insert(android.provider.ContactsContract.Data.CONTENT_URI, values);
-
     }
+
+
+
 }

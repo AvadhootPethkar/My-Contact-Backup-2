@@ -7,7 +7,7 @@
     tools:context="com.avadh.mycontactbackup2.ContactMenuList"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_listlayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -18,40 +18,106 @@
         android:layout_height="200dp"
         android:layout_marginTop="20sp"
         android:isScrollContainer="true"></ListView>
-    </LinearLayout>
-    <Button
-        android:id="@+id/bt_backup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/ll_listlayout"
-        android:text="Backup"/>
+        <ProgressBar
+            android:id="@+id/pb_listpb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_buttonlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_listlayout">
+
+        <ImageView android:layout_height="50dp"
+                   android:layout_width="50dp"
+                   android:src="@drawable/ic_backup"
+                   android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/bt_backup"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:text="Backup"
+            android:textSize="20dp"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"
+            android:background="@color/colorGray50"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_restorell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_buttonlayout">
+
+    <ImageView android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:src="@drawable/ic_cloud_download"
+        android:layout_gravity="center"/>
     <Button
         android:id="@+id/bt_restore"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/bt_backup"
-        android:text="Restore"/>
+        android:text="Restore"
+        android:textSize="20dp"
+        android:textAlignment="viewStart"
+        android:layout_weight="1"
+        android:background="@color/colorGray50"/>
 
-    <Button
-        android:id="@+id/bt_viewbackup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/bt_restore"
-        android:text="View backup"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/bt_deletebackup"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_deletell"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/bt_viewbackup"
-        android:text="Delete Backup"/>
+        android:layout_below="@id/ll_restorell">
+
+        <ImageView android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:src="@drawable/ic_delete"
+            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/bt_deletebackup"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:text="Delete"
+            android:textSize="20dp"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"
+            android:background="@color/colorGray50"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_logoutll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_deletell">
+
+        <ImageView android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:src="@drawable/ic_shutdown"
+            android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/bt_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:text="LogOut"
+            android:textSize="20dp"
+            android:textAlignment="viewStart"
+            android:layout_weight="1"
+            android:background="@color/colorGray50"/>
+
+    </LinearLayout>
+
+
 </RelativeLayout>
